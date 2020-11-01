@@ -8,7 +8,7 @@ namespace Baraja\Combinations;
 final class CombinationGenerator
 {
 	/**
-	 * @param mixed[][] $input
+	 * @param mixed[][]|mixed[] $input
 	 * @return string[][]
 	 */
 	public function generate(array $input): array
@@ -45,7 +45,7 @@ final class CombinationGenerator
 
 
 	/**
-	 * @param mixed[][] $input
+	 * @param mixed[][]|mixed[] $input
 	 * @return int
 	 */
 	public function countCombinations(array $input): int
@@ -62,7 +62,7 @@ final class CombinationGenerator
 
 	/**
 	 * @param string[][] $input
-	 * @return string[][]
+	 * @return string[][]|string[]
 	 */
 	private function combinations(array $input, int $i = 0): array
 	{
@@ -86,7 +86,7 @@ final class CombinationGenerator
 
 
 	/**
-	 * @param mixed[][] $input
+	 * @param mixed[][]|mixed[] $input
 	 */
 	private function validateInput(array $input): void
 	{
