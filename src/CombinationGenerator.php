@@ -50,6 +50,9 @@ final class CombinationGenerator
 	 */
 	public function countCombinations(array $input): int
 	{
+		if ($input === []) {
+			return 0;
+		}
 		$this->validateInput($input);
 		$return = 1;
 		foreach ($input as $values) {
