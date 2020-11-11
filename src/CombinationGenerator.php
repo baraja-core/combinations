@@ -72,6 +72,14 @@ final class CombinationGenerator
 		if (isset($input[$i]) === false) {
 			return [];
 		}
+		if (count($input) === 1 && $i === 0) {
+			$emptyReturn = [];
+			foreach ($input[0] ?? [] as $item) {
+				$emptyReturn[] = [$item];
+			}
+
+			return $emptyReturn;
+		}
 		if ((count($input) - 1) === $i) {
 			return $input[$i];
 		}
