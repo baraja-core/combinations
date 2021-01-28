@@ -34,7 +34,7 @@ final class CombinationGenerator
 		$return = [];
 		foreach ($this->combinations(array_values($input)) as $values) {
 			$item = [];
-			foreach ($values as $value) {
+			foreach ((array) $values as $value) {
 				$item[$valueToKey[$value] ?? $value] = $value;
 			}
 			$return[] = $item;
