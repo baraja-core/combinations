@@ -24,7 +24,7 @@ final class CombinationGenerator
 				if (isset($valueToKey[$value]) === true) {
 					throw new \InvalidArgumentException(
 						'Value "' . $value . '" is not unique, because the value is used '
-						. 'in the "' . $key . '" and "' . $valueToKey[$value] . '" key.'
+						. 'in the "' . $key . '" and "' . $valueToKey[$value] . '" key.',
 					);
 				}
 				$valueToKey[$value] = $key;
@@ -80,7 +80,7 @@ final class CombinationGenerator
 
 			return $emptyReturn;
 		}
-		if ((count($input) - 1) === $i) {
+		if (count($input) - 1 === $i) {
 			return $input[$i];
 		}
 
