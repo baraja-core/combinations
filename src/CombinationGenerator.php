@@ -22,10 +22,12 @@ final class CombinationGenerator
 		foreach ($input as $key => $values) {
 			foreach ($values as $value) {
 				if (isset($valueToKey[$value]) === true) {
-					throw new \InvalidArgumentException(
-						'Value "' . $value . '" is not unique, because the value is used '
-						. 'in the "' . $key . '" and "' . $valueToKey[$value] . '" key.',
-					);
+					throw new \InvalidArgumentException(sprintf(
+						'Value "%s" is not unique, because the value is used in the "%s" and "%s" key.',
+						$value,
+						$key,
+						$valueToKey[$value],
+					));
 				}
 				$valueToKey[$value] = $key;
 			}
@@ -46,7 +48,6 @@ final class CombinationGenerator
 
 	/**
 	 * @param mixed[][]|mixed[] $input
-	 * @return int
 	 */
 	public function countCombinations(array $input): int
 	{
@@ -72,7 +73,7 @@ final class CombinationGenerator
 		if (isset($input[$i]) === false) {
 			return [];
 		}
-		if (count($input) === 1 && $i === 0) {
+		if ($i === 0 && count($input) === 1) {
 			$emptyReturn = [];
 			foreach ($input[0] ?? [] as $item) {
 				$emptyReturn[] = [$item];
@@ -102,15 +103,15 @@ final class CombinationGenerator
 	private function validateInput(array $input): void
 	{
 		foreach ($input as $key => $values) {
-			if ((is_int($key) || (is_string($key) && preg_match('/^[+-]?\d+$/', $key))) === true) {
+			if ((is_int($key) || (is_string($key) && preg_match('/^[+-]?\d+$/', $key) === 1)) === true) {
 				throw new \InvalidArgumentException('Section key must be non numeric key.');
 			}
 			if (\is_array($values) === false) {
-				throw new \InvalidArgumentException('Section values must be array, but "' . \gettype($values) . '" given.');
+				throw new \InvalidArgumentException('Section values must be array, but "' . get_debug_type($values) . '" given.');
 			}
-			foreach ($values as $valueKey => $item) {
+			foreach ($values as $item) {
 				if (\is_string($item) === false) {
-					throw new \InvalidArgumentException('Section item value must be a string, but "' . \gettype($item) . '" given.');
+					throw new \InvalidArgumentException('Section item value must be a string, but "' . get_debug_type($item) . '" given.');
 				}
 			}
 		}
