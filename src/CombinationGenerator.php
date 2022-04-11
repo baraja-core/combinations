@@ -16,7 +16,7 @@ final class CombinationGenerator
 		try {
 			$this->validateInput($input);
 		} catch (\InvalidArgumentException $e) {
-			throw new \InvalidArgumentException('Invalid combination input: ' . $e->getMessage(), (int) $e->getCode(), $e);
+			throw new \InvalidArgumentException('Invalid combination input: ' . $e->getMessage(), $e->getCode(), $e);
 		}
 		$valueToKey = [];
 		foreach ($input as $key => $values) {
@@ -103,7 +103,7 @@ final class CombinationGenerator
 	private function validateInput(array $input): void
 	{
 		foreach ($input as $key => $values) {
-			if ((is_int($key) || (is_string($key) && preg_match('/^[+-]?\d+$/', $key) === 1)) === true) {
+			if (is_numeric($key) || preg_match('/^[+-]?\d+$/', $key) === 1) {
 				throw new \InvalidArgumentException('Section key must be non numeric key.');
 			}
 			if (\is_array($values) === false) {
